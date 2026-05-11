@@ -1,0 +1,21 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.MukundaKatta/url",
+  "description": "MCP server: parse and build URLs. Host, port, path, query params, fragment.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/MukundaKatta/url-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/MukundaKatta/url-mcp",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@mukundakatta/url-mcp",
+      "version": "0.1.0",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}
