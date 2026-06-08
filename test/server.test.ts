@@ -58,3 +58,32 @@ test('round-trip parse → build is stable', () => {
   });
   assert.equal(built, orig);
 });
+
+test('build embeds credentials, hash, and normalizes the fragment', () => {
+  const u = buildUrl({
+    protocol: 'https',
+    hostname: 'x.com',
+    pathname: '/a',
+    username: 'u',
+    password: 'p',
+    hash: 'frag',
+  });
+  assert.equal(u, 'https://u:p@x.com/a#frag');
+  // A leading '#' is accepted and not doubled.
+  assert.equal(buildUrl({ protocol: 'https', hostname: 'x.com', hash: '#frag' }), 'https://x.com/#frag');
+});
+
+test('round-trip with credentials, query, and fragment is stable', () => {
+  const orig = 'https://u:p@x.com/a?b=1#c';
+  const p = parseUrl(orig);
+  const built = buildUrl({
+    protocol: p.protocol,
+    hostname: p.hostname,
+    username: p.username,
+    password: p.password,
+    pathname: p.pathname,
+    query: p.query as Record<string, string>,
+    hash: p.hash,
+  });
+  assert.equal(built, orig);
+});
